@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maria e Maycon</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #282727;
+            color: #fff;
+        }
+
+        .background-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(13, 13, 13, 0.7); /* Fundo preto translúcido */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .slideshow {
+            position: relative;
+            width: 80%;
+            max-width: 800px;
+            height: 400px;
+            overflow: hidden;
+            margin: 50px auto 20px auto;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .slideshow img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slideshow img.active {
+            opacity: 1;
+        }
+
+        .timer {
+            font-size: 20px;
+            margin: 10px 0;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .time-details {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .date-part p,
+        .time-part p {
+            margin: 5px 0;
+        }
+
+        .separator {
+            font-size: 24px;
+            margin: 20px 0;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .message p {
+            font-size: 22px;
+            text-align: center;
+            color: #ffffff;
+            margin: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="background-overlay">
+    <div class="slideshow">
+        <img src="assets/img/img1.jpeg" alt="Imagem 1" class="active">
+        <img src="assets/img/img2.jpeg" alt="Imagem 2">
+        <img src="assets/img/img3.jpeg" alt="Imagem 3">
+    </div>
+    
+    <div class="timer">
+        <div class="time-details">
+            <div class="date-part">
+                <p id="datePart"></p>
+            </div>
+            <div class="time-part">
+                <p id="timePart"></p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="separator">——————————</div>
+    
+    <div class="message">
+        <p>Eu te amo mais que ontem, e menos que amanhã. 
+            <br>Você é a minha melhor escolha! 💘∞</p>
+    </div>
+</div>
+
+<script>
+    // Função para alternar as imagens do carrossel
+    function startSlideshow() {
+        const slides = document.querySelectorAll('.slideshow img');
+        let currentIndex = 0;
+
+        function showNextSlide() {
+            slides[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % slides.length;
+            slides[currentIndex].classList.add('active');
+        }
+
+        setInterval(showNextSlide, 3000); // Troca a cada 3 segundos
+    }
+
+    startSlideshow();
+
+    // Função para calcular a diferença entre duas datas
+    function calculateTimeTogether() {
+        const startDate = new Date('2023-06-26T02:30:00');
+        const now = new Date();
+
+        let years = now.getFullYear() - startDate.getFullYear();
+        let months = now.getMonth() - startDate.getMonth();
+        let days = now.getDate() - startDate.getDate();
+
+        if (months < 0) {
+            years--;
+            months += 12;
+        }
+        if (days < 0) {
+            months--;
+            const previousMonth = new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+            days += previousMonth;
+        }
+
+        let hours = now.getHours() - startDate.getHours();
+        let minutes = now.getMinutes() - startDate.getMinutes();
+        let seconds = now.getSeconds() - startDate.getSeconds();
+
+        if (seconds < 0) {
+            minutes--;
+            seconds += 60;
+        }
+        if (minutes < 0) {
+            hours--;
+            minutes += 60;
+        }
+        if (hours < 0) {
+            days--;
+            hours += 24;
+        }
+
+        document.getElementById('datePart').innerHTML = 
+            `${years} ano${years !== 1 ? 's' : ''}, ${months} mês${months !== 1 ? 'es' : ''}, ${days} dia${days !== 1 ? 's' : ''}`;
+        document.getElementById('timePart').innerHTML = 
+            `${hours} hora${hours !== 1 ? 's' : ''}, ${minutes} minuto${minutes !== 1 ? 's' : ''}, e ${seconds} segundo${seconds !== 1 ? 's' : ''} juntos`;
+    }
+
+    setInterval(calculateTimeTogether, 1000);
+</script>
+
+</body>
+</html>
