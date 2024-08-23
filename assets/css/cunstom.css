@@ -1,4 +1,3 @@
-
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -7,7 +6,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #0c0c0c;
+    background-color: #101010;
     color: #fff;
 }
 
@@ -27,16 +26,19 @@ body {
 
 .slideshow {
     position: relative;
-    width: 80%; /* Ajuste conforme necessário */
-    max-width: 800px; /* Largura máxima */
-    height: 400px; /* Ajuste a altura conforme necessário */
+    width: 80%;
+    max-width: 800px;
+    height: 400px;
     overflow: hidden;
-    margin: 50px auto 20px auto; /* Espaçamento acima e abaixo, centralizado */
-    padding: 0; /* Remover padding para centralizar a imagem */
-    box-sizing: border-box; /* Inclui o padding no tamanho total do elemento */
+    margin: 50px auto 20px auto;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 .slideshow img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -44,30 +46,36 @@ body {
     transition: opacity 1s ease-in-out;
 }
 
-.container {
-    text-align: center;
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(61, 60, 60, 0.1);
-    max-width: 400px;
-    z-index: 2;
-    display: none; /* Escondido, mas disponível se quiser adicionar algo depois */
+.slideshow img.active {
+    opacity: 1;
 }
 
-
-
-.timer p {
+.timer {
     font-size: 20px;
     margin: 10px 0;
     color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.time-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.date-part p,
+.time-part p {
+    margin: 5px 0;
 }
 
 .separator {
     font-size: 24px;
     margin: 20px 0;
     font-weight: bold;
-    color:rgb(44, 47, 46);
+    color: #8a8a8a;
 }
 
 .message p {
